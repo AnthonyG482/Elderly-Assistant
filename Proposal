@@ -1,0 +1,32 @@
+
+Program Methodology and Implementations
+
+- Create custom user profile, store in database (SQL).
+- Make much more predictive responses to aid elderly, and add frequent reminders and help tips without prompt (maybe add option to disable for limited period of time) to tell people what they don't know.
+- Tie in ChatGPT LLM to adjust scheduled reminders and tips/advice based on behavior data (analysis).
+- Add localizations either than English in the future
+
+- Give PROACTIVE reminders to go outside and stay active... SUPER important for elderly people!!
+- Tell them the weather and if they need to wear extra clothing before going outside.
+- Build custom webserver using Flask to interact with SQL server & assistant devices.
+- Create two webpage formats, one for the patient to be able to check their own information, and one for doctors/caregivers/family members to monitor and update patient information.
+
+
+
+PROOF-OF-CONCEPT GOALS:
+_________________________________________________
+
+Just talk to it, and have it do something
+Schedule one assigned reminder for user, that the app will automatically remind.
+Prevent the user from being able to exit the app once launched (without power-cycling).
+Simply upload skill, NO SQL, NO ChatGPT-API integration!!
+
+
+
+
+Future Features:
+- Enable patients to form health groups on the web portal, and allow them to communicate messages to each other via. assistant.
+- Add reactive patterns to behaivor using ChatGPT (custom responses, alter questionaires).
+
+
+
