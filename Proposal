@@ -3,13 +3,36 @@ Program Methodology and Implementations
 
 - Create custom user profile, store in database (SQL).
 - Make much more predictive responses to aid elderly, and add frequent reminders and help tips without prompt (maybe add option to disable for limited period of time) to tell people what they don't know.
-- Tie in ChatGPT LLM to adjust scheduled reminders and tips/advice based on behavior data (analysis).
-- Add localizations either than English in the future
-
-- Give PROACTIVE reminders to go outside and stay active... SUPER important for elderly people!!
+- Add language localizations either than English in the future
 - Tell them the weather and if they need to wear extra clothing before going outside.
+
+- ChatGPT-3.5 LLM to adjust scheduled reminders and tips/advice based on behavior data (analysis).
+- Give PROACTIVE reminders to go outside and stay active... SUPER important for elderly people!!
 - Build custom webserver using Flask to interact with SQL server & assistant devices.
 - Create two webpage formats, one for the patient to be able to check their own information, and one for doctors/caregivers/family members to monitor and update patient information.
+
+
+HIPAA COMPLIANCE: (HIGHEST ORDER IMPORTANCE)
+_________________________________________________
+This is VERY IMPORTANT! In order to provide health services to patients in the U.S, we are required By Law to uphold all HIPAA standards with any health data we plan to store. This is not something to be taken lightly, as we all can recieve major legal repercussions if we do not obey these regulations entirely, not to mention our moral obligation as students of computer science to protect this information with the highest order. This supposedly INCLUDES our own information! We will absolutely need to speak with a specialist regarding this matter before we store any real public health data on any database system we create at any point, no matter if its simply for research, and even including our own. All stored health data MUST be constructed artificially until we are HIPAA compliant. No leeway on this one.
+
+
+
+GENERAL OVERVIEW OF HIPAA STANDARDS:
+- Data Encryption: All health data must be encrypted while in the DB and during transit. This includes data at rest in file systems, moving from application layer (Skill) to DB layer or among components. Encryption must ensure no one may bypass the database altogether and access information directly (NO plaintext).
+
+- Proper Key Management: All private/secret keys are to be stored ONLY on air-gapped systems (ALWAYS disconnected from internet), until we recieve further discrecion on what level of security is sufficent for key storage. It is probably not to that level, but until we know for sure, we must do this (we cannot be under par). We can disable network interfaces for good measure to prevent accidents. If a system storing keys is under any circumstance brought online unprotected, even for a moment, this rule is potentially violated.
+
+- Unique User IDs: HIPAA requires unique IDs for all users. We'll be doing this already (easy).
+
+- Authentication: All database operations must be done with private user accounts PER person (so that changes by person can be audited), and using SSL/TLS encrypted transit. No one is to operate on the database as the root account, or we'll have to sanitize and rollback the whole thing. We really dont wanna revert the db guys ;-;
+
+- Audit Logs: All database usage (log-ons, reads, writes and edits) anytime must be logged in a filestream on a system other than the one hosting the database itself. Logs must be archived at least six years according to HIPAA requirements.
+
+- Database Backups: Required to be created & tested, which we will also do to make sure they actually work in the event we need to restore. All database backups themselves must be fully encrypted.
+
+- Data Destruction: When you delete data, it doesn't actually disappear from the drive, the system simply forgets the location where the file is on the physical disk. Anyone with software forensic tools can instantly recover that file. Any private information we need to remove (database info on HDD before encryption) must be destroyed using overwrite tools. 'Eraser' is a great example for this and is very easy to use, preconfigured to uphold HIPAA out of the box. Health data additionally should never be stored on SSDs (HDDs are okay) even if it is to be deleted.
+
 
 
 
@@ -21,8 +44,11 @@ Schedule one assigned reminder for user, that the app will automatically remind.
 Prevent the user from being able to exit the app once launched (without power-cycling).
 Simply upload skill, NO SQL, NO ChatGPT-API integration!!
 
-
-
+COMPONENT LIST:
+Alexa Skill - Python3
+Web server - Flask (Python) & AWS (for 24/7 Hosting)
+Patient profiles - MySQL v8 Database , MySQL Workbench
+Data Destruction - Eraser (Windows) & shred (Linux)
 
 Future Features:
 - Enable patients to form health groups on the web portal, and allow them to communicate messages to each other via. assistant.
