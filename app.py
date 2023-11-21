@@ -145,7 +145,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
             .ask(prompts.HELP_REPROMPT)
             .response
         )
-        
+
 # Custom intent request handler
 class EmotionInfoRequest(AbstractRequestHandler):
     """Handler for emotion info request"""
@@ -217,4 +217,4 @@ sb.add_global_request_interceptor(RequestLogger())
 sb.add_global_response_interceptor(ResponseLogger())
 
 # Handler name that is used on AWS lambda
-handler = sb.lambda_handler()
+lambda_handler = sb.lambda_handler()
